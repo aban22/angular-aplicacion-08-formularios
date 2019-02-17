@@ -20,7 +20,10 @@
         <div class="form-group row">
             <label class="col-2 col-form-label">Apellido</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="Apellido" name="apellido" [(ngModel)]="usuario.apellido" required>
+                <input class="form-control" type="text" placeholder="Apellido" name="apellido" [(ngModel)]="usuario.apellido" required #apellido="ngModel">
+                <div *ngIf="apellido.errors?.required">
+                    Este campo es requerido
+                </div>
             </div>
         </div>
 
@@ -29,7 +32,13 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">Correo</label>
         <div class="col-md-8">
-            <input class="form-control" type="email" placeholder="Correo electrónico" name="correo" [(ngModel)]="usuario.correo" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <input class="form-control" type="email" placeholder="Correo electrónico" name="correo" [(ngModel)]="usuario.correo" required #correo="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <div *ngIf="correo.errors?.required">
+                    Este campo es requerido
+                </div>
+                <div *ngIf="correo.errors?.pattern">
+                    El campo no tiene formato de correo
+                </div>
         </div>
     </div>
 
