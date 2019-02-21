@@ -48,7 +48,20 @@ export class DataComponent {
             password2: new FormControl()
         });
         this.formulario.controls['password2'].setValidators([Validators.required, this.noIgual.bind(this.formulario)]);
+
         this.formulario.setValue(this.usuario);
+
+        this.formulario.controls['username'].valueChanges.subscribe(
+            data => {
+                console.log(data);
+            }
+        );
+
+        this.formulario.controls['username'].statusChanges.subscribe(
+            data => {
+                console.log(data);
+            }
+        );
     }
 
 
