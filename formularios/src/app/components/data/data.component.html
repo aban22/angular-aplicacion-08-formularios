@@ -2,25 +2,33 @@
 <hr>
 <form [formGroup]="formulario" (ngSubmit)="guardarCambios()" novalidate="novalidate">
 
-    <div>
+    <div formGroupName="nombrecompleto"> 
 
         <div class="form-group row">
             <label class="col-2 col-form-label">Nombre</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre" [ngClass]="{'is-invalid':formulario.controls['nombre'].errors!=null && formulario.controls['nombre'].touched, 'is-valid':formulario.controls['nombre'].errors==null}">
-                <div *ngIf="formulario.controls['nombre'].errors?.required" class="form-control-feedback invalid-feedback">
-                    El nombre es obligatorio
-                </div>
-                <div *ngIf="formulario.controls['nombre'].errors?.minlength" class="form-control-feedback invalid-feedback">
+                <!-- [ngClass]="{'is-invalid':formulario.get('nombrecompleto.nombre').errors!=null && formulario.get('nombrecompleto.nombre').touched, 'is-valid':formulario.get('nombrecompleto.nombre').errors==null}" -->
+                <input 
+                    class="form-control" 
+                    type="text" 
+                    placeholder="Nombre" 
+                    formControlName="nombre"
+                    [ngClass]="{'is-invalid':formulario.controls['nombrecompleto'].controls['nombre'].errors!=null && formulario.get('nombrecompleto.nombre').touched, 'is-valid':formulario.get('nombrecompleto.nombre').errors==null}"
+                    >
+                    <div *ngIf="!!formulario.get('nombrecompleto.nombre').errors?.required" class="invalid-feedback">
+                        El nombre es obligatorio
+                    </div>
+                <!-- <div *ngIf="formulario.get('nombrecompleto.nombre').errors?.minlength" class="form-control-feedback invalid-feedback">
                     Por lo menos 3 caracteres
-                </div>
+                </div> -->
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-2 col-form-label">Apellido</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="Apellido" formControlName="apellido" [ngClass]="{'is-invalid':formulario.controls['apellido'].errors!=null && formulario.controls['apellido'].touched, 'is-valid':formulario.controls['apellido'].errors==null}">
+                <!-- [ngClass]="{'is-invalid':formulario.controls('nombrecompleto.apellido').errors!=null && formulario.controls('nombrecompleto.apellido').touched, 'is-valid':formulario.get('nombrecompleto.apellido').errors==null}" -->
+                <input class="form-control" type="text" placeholder="Apellido" formControlName="apellido" >
             </div>
         </div>
 

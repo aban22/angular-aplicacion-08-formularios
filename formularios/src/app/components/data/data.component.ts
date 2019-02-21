@@ -10,15 +10,25 @@ export class DataComponent {
 
     formulario: FormGroup;
 
+    usuario = {
+        nombrecompleto: {
+            nombre: 'Fernando',
+            apellido: 'Herrera'
+        },
+        correo: 'email@email.com'
+    };
+
     constructor() {
         this.formulario = new FormGroup({
-            nombre:     new FormControl(
+            nombrecompleto: new FormGroup({
+                nombre:     new FormControl(
                                         null,
                                         [
                                             Validators.required,
                                             Validators.minLength(3)
                                         ]),
-            apellido:   new FormControl(null,   Validators.required),
+                apellido:   new FormControl(null,   Validators.required),
+            }),
             correo:     new FormControl(
                                         null,
                                         [
