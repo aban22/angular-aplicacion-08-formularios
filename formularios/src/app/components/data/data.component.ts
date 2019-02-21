@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data',
@@ -16,6 +17,7 @@ export class DataComponent {
             apellido: 'Herrera'
         },
         correo: 'email@email.com',
+        username: null,
         password1: null,
         password2: null
     };
@@ -41,6 +43,7 @@ export class DataComponent {
                                             Validators.required,
                                             Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
                                         ]),
+            username: new FormControl(null, Validators.required, this.existeUsuario),
             password1: new FormControl(null, Validators.required),
             password2: new FormControl()
         });
@@ -66,6 +69,22 @@ export class DataComponent {
             };
         }
         return null;
+    }
+
+    existeUsuario(control: FormControl): Promise<any> | Observable<any> {
+        const promesa = new Promise(
+            (resolve, reject) => {
+                setTimeout(() => {
+                    if (control.value === 'strider') {
+                        resolve({existe: true});
+                    } else {
+                        resolve(null);
+                    }
+                }, 3000);
+            }
+        );
+
+        return promesa;
     }
 
     guardarCambios() {
