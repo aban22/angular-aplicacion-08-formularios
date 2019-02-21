@@ -12,7 +12,12 @@ export class DataComponent {
 
     constructor() {
         this.formulario = new FormGroup({
-            nombre:     new FormControl(null,   Validators.required),
+            nombre:     new FormControl(
+                                        null,
+                                        [
+                                            Validators.required,
+                                            Validators.minLength(3)
+                                        ]),
             apellido:   new FormControl(null,   Validators.required),
             correo:     new FormControl(
                                         null,
