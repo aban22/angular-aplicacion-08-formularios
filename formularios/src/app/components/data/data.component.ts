@@ -27,7 +27,11 @@ export class DataComponent {
                                             Validators.required,
                                             Validators.minLength(3)
                                         ]),
-                apellido:   new FormControl(null,   Validators.required),
+                apellido:   new FormControl(
+                                        null,
+                                        [Validators.required,
+                                        this.noHerrera
+                                    ]),
             }),
             correo:     new FormControl(
                                         null,
@@ -40,11 +44,21 @@ export class DataComponent {
         this.formulario.setValue(this.usuario);
     }
 
+
+    noHerrera(control: FormControl) {
+        if (control.value === 'herrera') {
+            return {
+                noHerrera: true
+            };
+        }
+        return null;
+    }
+
     guardarCambios() {
         console.log(this.formulario.value);
         console.log(this.formulario);
 
-        this.formulario.reset(this.usuario);
+        // this.formulario.reset(this.usuario);
     }
 
 }
